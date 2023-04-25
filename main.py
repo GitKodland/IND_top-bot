@@ -1,29 +1,29 @@
 from settings import settings
 import discord
-# import * - is a quick way to import all files in the library
+# import * - adalah cara cepat untuk mengimpor semua file di perpustakaan
 from bot_logic import *
 
-# The intents variable stores the bot's priviliges
+# Variabel intents menyimpan hak istimewa bot
 intents = discord.Intents.default()
-# Enabling the message-reading privelege
+# Mengaktifkan hak istimewa message-reading
 intents.message_content = True
-# Creating a bot in the client variable and transferring it the priveleges
+# Membuat bot di variabel klien dan memindahkan hak istimewa
 client = discord.Client(intents=intents)
 
 
-# Once the bot is ready, it will print its name!
+# Setelah bot siap, ia akan mencetak namanya!
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
 
 
-# When the bot receives a message, it will send messages in the same channel!
+# Saat bot menerima pesan, bot akan mengirimkan pesan di saluran yang sama!
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
     if message.content.startswith('$hello'):
-        await message.channel.send('Hi! I am a bot!')
+        await message.channel.send('Saya! Saya bot!')
     elif message.content.startswith('$smile'):
         await message.channel.send(gen_emodji())
     elif message.content.startswith('$coin'):
@@ -31,6 +31,6 @@ async def on_message(message):
     elif message.content.startswith('$pass'):
         await message.channel.send(gen_pass(10))
     else:
-        await message.channel.send("Can't process this command, sorry!")
+        await message.channel.send("Tidak dapat memproses perintah ini, maaf")
 
 client.run(settings["TOKEN"])
